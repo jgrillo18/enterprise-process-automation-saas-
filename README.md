@@ -101,6 +101,25 @@ http://localhost:5000
 
 **Nota:** si haces `docker-compose down` y borras el volumen `postgres_data`, se regenerará el usuario `admin` con contraseña `admin` al iniciar de nuevo.
 
+---
+
+### 📢 Despliegue en GitHub Pages
+
+Para publicar una demo estática en GitHub Pages se utiliza un flujo de GitHub Actions.
+El contenido que se entrega es el que pongas en la carpeta `docs/`.
+
+1. Crea un **Personal Access Token (PAT)** en tu cuenta de GitHub con el alcance `repo`.
+   - Entra a https://github.com/settings/tokens → Generate new token → selecciona `repo` scope → crear.
+2. Añade el token como secreto en tu repositorio: Settings → Secrets → Actions → New repository secret.
+   - Nombre sugerido: `GH_PAT`.
+3. Cada vez que hagas `git push` a `main`, el workflow (`.github/workflows/pages.yml`) tomará ese token y subirá los archivos de `docs/` a la rama `gh-pages`.
+4. Activa GitHub Pages en Settings → Pages seleccionando “GitHub Actions” como fuente.
+
+La URL resultante será:
+`https://jgrillo18.github.io/enterprise-process-automation-saas-/` (ajusta si cambias el nombre del repo).
+
+Podrás actualizar la demo simplemente modificando la carpeta `docs/` y haciendo push.
+
 ## 🔐 Endpoints principales
 
 > **Credenciales iniciales**

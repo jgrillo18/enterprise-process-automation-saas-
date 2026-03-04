@@ -11,11 +11,10 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      # prepare artifact from docs folder
-      - name: Upload pages artifact
-        uses: actions/upload-pages-artifact@v2
-        with:
-          path: ./docs
-
+      # deploy using personal access token stored in secret GH_PAT
       - name: Deploy to GitHub Pages
-        uses: actions/deploy-pages@v1
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GH_PAT }}
+          publish_dir: ./docs
+          publish_branch: gh-pages
