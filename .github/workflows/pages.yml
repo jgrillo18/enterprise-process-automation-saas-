@@ -5,26 +5,17 @@ on:
     branches:
       - main
 
-# grant Pages permissions so the bot can push to gh-pages
-permissions:
-  contents: read
-  pages: write
-  actions: write
-  id-token: write
-
 jobs:
   build-deploy:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-        with:
-          persist-credentials: true   # keep GITHUB_TOKEN available for later push
 
-      # no build step needed for now; site is already in docs/
+      # prepare artifact from docs folder
+      - name: Upload pages artifact
+        uses: actions/upload-pages-artifact@v1
+        with:
+          path: ./docs
 
       - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v4
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./docs
-          publish_branch: gh-pages
+        uses: actions/deploy-pages@v1
